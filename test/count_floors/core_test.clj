@@ -22,4 +22,11 @@
             [close g/s-pos-int 
              diff g/s-pos-int
              coll (floor-gen (+ diff close) close)]
-            (is (= diff (count-total coll)))))
+            (is (= diff (count-total coll))))
+
+  (checking "more close than open returns negative difference" 100
+            [open g/s-pos-int 
+             diff g/s-pos-int
+             coll (floor-gen open (+ diff open))]
+            (is (= (- diff) (count-total coll)))))
+
