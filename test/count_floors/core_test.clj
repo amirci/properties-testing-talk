@@ -18,15 +18,20 @@
               (repeat close close-char)))))
 
 (deftest count-floors
-  (checking "more open than close returns positive difference" 100
+  (checking "more open than close returns positive difference" 20
             [close g/s-pos-int 
              diff g/s-pos-int
              coll (floor-gen (+ diff close) close)]
             (is (= diff (count-total coll))))
 
-  (checking "more close than open returns negative difference" 100
+  (checking "more close than open returns negative difference" 20
             [open g/s-pos-int 
              diff g/s-pos-int
              coll (floor-gen open (+ diff open))]
-            (is (= (- diff) (count-total coll)))))
+            (is (= (- diff) (count-total coll))))
+
+  (checking "same close as open returns zero" 20
+            [open g/s-pos-int 
+             coll (floor-gen open open)]
+            (is (zero? (count-total coll)))))
 
