@@ -1,6 +1,5 @@
 (ns count-floors.core)
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+(defn count-total
+  [s]
+  (reduce #(+ %1 (if (= %2 \() 1 -1)) 0 s))

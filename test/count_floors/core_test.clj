@@ -1,11 +1,25 @@
 (ns count-floors.core-test
   (:require 
-    [clojure.test.check.clojure-test :refer [defspec]]
-    [clojure.test.check.generators :as gen]
-    [clojure.test.check.properties :as prop]
-    [clojure.test :refer :all]
+    [clojure.test.check.generators :as g]
+    [clojure.test :refer [deftest is]]
+    [com.gfredericks.test.chuck.clojure-test :refer [checking]]
     [count-floors.core :refer :all]))
 
-(defspec sort-idempotent-prop
-  (prop/for-all [v (gen/vector gen/int)]
-    (= (sort v) (sort (sort v)))))
+(def open-char \()
+
+(def close-char \))
+
+(defn floor-gen
+  [open close]
+  (g/fmap #(apply str %)
+          (g/shuffle
+            (concat
+              (repeat open open-char)
+              (repeat close close-char)))))
+
+(deftest count-floors
+  (checking "more open than close returns positive difference" 100
+            [close g/s-pos-int 
+             diff g/s-pos-int
+             coll (floor-gen (+ diff close) close)]
+            (is (= diff (count-total coll)))))
