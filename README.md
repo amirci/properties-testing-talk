@@ -1,14 +1,10 @@
 # count-floors
 
-A Clojure library designed to ... well, that part is up to you.
+Demo for properties testing with code for the first day of [AOC 2015](http://adventofcode.com/2015)
 
-## Usage
+## Branches
 
-FIXME
+`part-a` Contains first part of the exercise
 
-## License
+`part-b` Contains second part of the exercise
 
-Copyright © 2017 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
